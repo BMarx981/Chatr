@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -28,7 +29,6 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		var msg string = string(bArr)
 		if erar != nil {
 			log.Fatal(erar)
-			delete(clients, ws)
 			break
 		}
 		//Send the newly received message to the broadcast channel
@@ -62,6 +62,7 @@ func main() {
 	log.Println("http server started on :8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
+		fmt.Println("someting happened!")
 		log.Fatal("ListenAndServe: ", err)
 	}
 }
